@@ -18,7 +18,7 @@ public:
                 }
             }
             else{ // Second part is sorted
-                if(nums[mid] < target && target < nums[high]){
+                if(nums[mid] < target && target <= nums[high]){
                     low = mid+1;
                 }
                 else{
