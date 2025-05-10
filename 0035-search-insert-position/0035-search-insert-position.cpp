@@ -17,6 +17,7 @@ public:
             }
 
         }
-        return high+1;
+        // In binary search, If a element is not present then low variable point to next possible greater than target.
+        return low; //return high+1; also works.
     }
 };
