@@ -14,7 +14,19 @@ If nums[mid] < nums[mid+1], go right (low = mid+1) → peak lies to the right.
 Else, go left (high = mid) → peak lies to the left or at mid.
 Eventually, low == high, and we return it as the peak index.
 */
+/*
+Why high = mid instead of high = mid - 1?
+Let’s take a closer look at the logic behind it:
 
+Case: nums[mid] > nums[mid + 1]
+This means the peak could be at mid, or somewhere on the left side (including mid).
+
+So we cannot eliminate mid — we must include it in the next search window.
+
+Thus:
+✅ high = mid
+❌ high = mid - 1 ← This might skip a valid peak at mid
+*/
 
     int findPeakElement(vector<int>& nums) {
         int n = nums.size();
