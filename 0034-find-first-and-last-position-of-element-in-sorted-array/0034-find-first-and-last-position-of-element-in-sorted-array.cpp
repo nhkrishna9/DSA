@@ -40,9 +40,13 @@ public:
     }
 
     vector<int> searchRange(vector<int>& nums, int target) {
+        /*
         vector<int> ans;
         ans.push_back(findLeft(nums, target));
         ans.push_back(findRight(nums, target));
         return ans;
+        */
+
+        return {findLeft(nums, target), findRight(nums, target)};  // ✅ FIXED
     }
 };
