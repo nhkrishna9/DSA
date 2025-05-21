@@ -10,7 +10,7 @@ public:
         Helper(ans, nums, index + 1, subset);
         
         // exclude nums[index]
-        subset.pop_back();  // backtrack
+        subset.pop_back();
         Helper(ans, nums, index + 1, subset);
     }
 
