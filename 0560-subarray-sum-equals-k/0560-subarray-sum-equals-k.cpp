@@ -1,21 +1,17 @@
 class Solution {
 public:
-    int subarraySum(vector<int>& arr, int k) {
-        unordered_map<int, int> sumToSumAtIdx;
-        int sum=0, ans=0;
-        for(int i=0; i<arr.size();i++){
-            sum = sum + arr[i];
-            if(sum == k){
-                ans = i + 1;
+    int subarraySum(vector<int>& nums, int k) {
+        int count = 0, sum = 0;
+        unordered_map<int, int> prefixSumFreq;
+        prefixSumFreq[0] = 1; // To handle subarrays that start from index 0
+        
+        for (int i = 0; i < nums.size(); ++i) {
+            sum += nums[i];
+            if (prefixSumFreq.find(sum - k) != prefixSumFreq.end()) {
+                count += prefixSumFreq[sum - k];
             }
-            if(sumToSumAtIdx.find(sum-k) != sumToSumAtIdx.end()){
-                int temp = i-sumToSumAtIdx[sum-k];
-                ans = max(ans, temp);
-            }
-            if(sumToSumAtIdx.find(sum) == sumToSumAtIdx.end()){
-                sumToSumAtIdx[sum] = i;
-            }
+            prefixSumFreq[sum]++;
         }
-        return ans;
+        return count;
     }
 };
