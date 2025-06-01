@@ -1,17 +1,23 @@
 class Solution {
 public:
-    int findMaxLength(std::vector<int>& nums) {
-        std::unordered_map<int, int> map;
-        map[0] = -1;
-        int maxlen = 0, count = 0;
+    int findMaxLength(vector<int>& nums) {
+        unordered_map<int, int> sumToIndex;
+        int sum = 0, maxLen = 0;
+
         for (int i = 0; i < nums.size(); i++) {
-            count += (nums[i] == 1) ? 1 : -1;
-            if (map.find(count) != map.end()) {
-                maxlen = std::max(maxlen, i - map[count]);
+            // Convert 0s to -1s
+            sum += (nums[i] == 0) ? -1 : 1;
+
+            if (sum == 0) {
+                maxLen = i + 1;
+            } else if (sumToIndex.find(sum) != sumToIndex.end()) {
+                int temp = i - sumToIndex[sum];
+                maxLen = max(maxLen, temp);
             } else {
-                map[count] = i;
+                sumToIndex[sum] = i;
             }
         }
-        return maxlen;
+
+        return maxLen;
     }
 };
