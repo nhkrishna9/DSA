@@ -24,7 +24,7 @@ public:
         
     }
 
-    bool hasAtMostTwoFruitTypes(const unordered_map<int, int>& basket) {
+    inline bool hasAtMostTwoFruitTypes(const unordered_map<int, int>& basket) {
         return basket.size() <= 2;
     }
 
