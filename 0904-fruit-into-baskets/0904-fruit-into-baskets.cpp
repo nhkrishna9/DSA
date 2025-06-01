@@ -28,7 +28,7 @@ public:
         return basket.size() <= 2;
     }
 
-    void removeLeftFruitIfNeeded(unordered_map<int, int>& basket, vector<int>& fruits, int& left) {
+    inline void removeLeftFruitIfNeeded(unordered_map<int, int>& basket, vector<int>& fruits, int& left) {
         while (!hasAtMostTwoFruitTypes(basket)) {
             basket[fruits[left]]--;
             if (basket[fruits[left]] == 0) {
