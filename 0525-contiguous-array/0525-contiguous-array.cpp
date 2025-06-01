@@ -6,7 +6,10 @@ public:
 
         for (int i = 0; i < nums.size(); i++) {
             // Convert 0s to -1s
-            sum += (nums[i] == 0) ? -1 : 1;
+            //sum += (nums[i] == 0) ? -1 : 1;
+            if(nums[i] == 0){nums[i]= -1;}
+
+            sum = sum + nums[i];
 
             if (sum == 0) {
                 maxLen = i + 1;
