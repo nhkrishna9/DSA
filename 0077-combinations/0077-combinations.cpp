@@ -5,7 +5,6 @@ public:
             ans.push_back(curr);
             return;
         }
-
         for(int j=i;j<=n;j++){
             curr.push_back(j);
             backtrack(ans, curr, j+1, n, k);
