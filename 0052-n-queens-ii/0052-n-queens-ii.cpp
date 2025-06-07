@@ -2,50 +2,87 @@ class Solution {
 public:
     int count = 0;
 
-    bool isValid(const vector<vector<bool>>& board, int n, int row, int col){
-        // Row and column checks
-        for(int i = 0; i < n; i++){
-            if(i != row && board[i][col]) return false;
-            if(i != col && board[row][i]) return false;
+    bool isSafe(const vector<vector<bool>>& board, int n, int row, int col) {
+        // Check column
+        for (int tempRow = 0; tempRow < n; ++tempRow) {
+            if (tempRow != row && board[tempRow][col]) {
+                return false;
+            }
         }
 
-        // Diagonal checks
-        // Top-left to bottom-right
-        for(int i = row - 1, j = col - 1; i >= 0 && j >= 0; i--, j--)
-            if(board[i][j]) return false;
+        // Check row
+        for (int tempCol = 0; tempCol < n; ++tempCol) {
+            if (tempCol != col && board[row][tempCol]) {
+                return false;
+            }
+        }
 
-        for(int i = row + 1, j = col + 1; i < n && j < n; i++, j++)
-            if(board[i][j]) return false;
+        // Check upper-left diagonal
+        int tempRow = row - 1;
+        int tempCol = col - 1;
+        while (tempRow >= 0 && tempCol >= 0) {
+            if (board[tempRow][tempCol]) {
+                return false;
+            }
+            tempRow--;
+            tempCol--;
+        }
 
-        // Top-right to bottom-left
-        for(int i = row - 1, j = col + 1; i >= 0 && j < n; i--, j++)
-            if(board[i][j]) return false;
+        // Check lower-right diagonal
+        tempRow = row + 1;
+        tempCol = col + 1;
+        while (tempRow < n && tempCol < n) {
+            if (board[tempRow][tempCol]) {
+                return false;
+            }
+            tempRow++;
+            tempCol++;
+        }
 
-        for(int i = row + 1, j = col - 1; i < n && j >= 0; i++, j--)
-            if(board[i][j]) return false;
+        // Check upper-right diagonal
+        tempRow = row - 1;
+        tempCol = col + 1;
+        while (tempRow >= 0 && tempCol < n) {
+            if (board[tempRow][tempCol]) {
+                return false;
+            }
+            tempRow--;
+            tempCol++;
+        }
+
+        // Check lower-left diagonal
+        tempRow = row + 1;
+        tempCol = col - 1;
+        while (tempRow < n && tempCol >= 0) {
+            if (board[tempRow][tempCol]) {
+                return false;
+            }
+            tempRow++;
+            tempCol--;
+        }
 
         return true;
     }
 
-    void Func(vector<vector<bool>>& board, int n, int row){
-        if(row == n){
+    void solveNQueensUtil(vector<vector<bool>>& board, int n, int row) {
+        if (row == n) {
             count++;
             return;
         }
 
-        for(int col = 0; col < n; col++){
-            if(isValid(board, n, row, col)){
+        for (int col = 0; col < n; ++col) {
+            if (isSafe(board, n, row, col)) {
                 board[row][col] = true;
-                Func(board, n, row + 1);
+                solveNQueensUtil(board, n, row + 1);
                 board[row][col] = false;
             }
         }
     }
 
     int totalNQueens(int n) {
-        vector<vector<bool>> board(n, vector<bool>(n, false));
         count = 0;
-        Func(board, n, 0);
+        vector<vector<bool>> board(n, vector<bool>(n, false));
+        solveNQueensUtil(board, n, 0);
         return count;
     }
 };
