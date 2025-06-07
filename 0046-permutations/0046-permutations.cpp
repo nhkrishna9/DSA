@@ -1,28 +1,25 @@
 class Solution {
-    void Helper(vector<vector<int>>& ans, vector<int>& nums, vector<int>& path) {
-
-        if(nums.size()== path.size()){
-            ans.push_back(path);
+public:
+    void backtrack(vector<int>& curr, vector<vector<int>>& ans, const vector<int>& nums){
+        if(curr.size() == nums.size()){
+            ans.push_back(curr);
+            return;
         }
-        
 
-        for(int i=0;i<nums.size();i++){
-            if (std::find(path.begin(), path.end(), nums[i]) != path.end()) {
-                continue;
+        for(const auto & num: nums){
+            if(find(curr.begin(), curr.end(), num) == curr.end()){
+                curr.push_back(num);
+                backtrack(curr, ans, nums);
+                curr.pop_back();
             }
-            path.push_back(nums[i]);
-            Helper(ans, nums, path);
-            path.pop_back();
-
         }
+
     }
 
-public:
     vector<vector<int>> permute(vector<int>& nums) {
         vector<vector<int>> ans;
-        vector<int> path;
-        Helper(ans, nums, path);
+        vector<int> curr{};
+        backtrack(curr, ans, nums);
         return ans;
     }
-
 };
