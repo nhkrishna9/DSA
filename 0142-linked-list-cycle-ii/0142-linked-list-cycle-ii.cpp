@@ -18,6 +18,9 @@ public:
                 break;
             }
         }
+        if(slow != fast){
+            return nullptr;
+        }
         fast = head;
         while(slow!=fast){
             fast = fast->next;
