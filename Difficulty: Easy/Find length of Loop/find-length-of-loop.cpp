@@ -16,26 +16,23 @@ class Solution {
         // Code here
         Node* slow = head;
         Node* fast = head;
-        
-        while(fast != nullptr && fast->next != nullptr){
+        while(fast!=nullptr && fast->next!=nullptr){
             slow = slow->next;
             fast = fast->next->next;
             if(slow == fast){
                 break;
             }
-            
         }
-        if(fast == nullptr || fast->next == nullptr){
+        if(fast==nullptr || fast->next==nullptr){
             return 0;
         }
-        
-        int count =1;
+        int count = 1;
         slow = slow->next;
         while(slow!=fast){
-            ++count;
             slow = slow->next;
-            
+            ++count;
         }
         return count;
+        
     }
 };
