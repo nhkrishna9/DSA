@@ -4,17 +4,18 @@ class Solution {
     int ans = 0;
     int num = 0;
     int sign = 1;
-    stack<int> stack{{sign}};  
+    stack<int> st;  
+    st.push(1); 
     for (const char c : s)
       if (isdigit(c))
         num = num * 10 + (c - '0');
       else if (c == '(')
-        stack.push(sign);
+        st.push(sign);
       else if (c == ')')
-        stack.pop();
+        st.pop();
       else if (c == '+' || c == '-') {
         ans += sign * num;
-        sign = (c == '+' ? 1 : -1) * stack.top();
+        sign = (c == '+' ? 1 : -1) * st.top();
         num = 0;
       }
     return ans + sign * num;
