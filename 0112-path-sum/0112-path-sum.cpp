@@ -12,7 +12,7 @@
 class Solution {
 public:
     void helper(TreeNode* root, int curr, bool& ans, int targetSum){
-        if(root==nullptr){
+        if(root==nullptr || ans){
             return;
         }
         
