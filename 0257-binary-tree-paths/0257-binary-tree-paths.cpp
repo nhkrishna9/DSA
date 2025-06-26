@@ -12,15 +12,18 @@
 class Solution {
 public:
     void helper(TreeNode* root, string path, vector<string>& ans){
-        if(root!=nullptr){
-            path += to_string(root->val);
-            if(root->left == nullptr && root->right ==nullptr){
-                ans.push_back(path);
-            }
-            path += "->";
-            helper(root->left, path, ans);
-            helper(root->right, path, ans);
+        if(root==nullptr){
+            return;
         }
+        
+        path += to_string(root->val);
+        if(root->left == nullptr && root->right ==nullptr){
+            ans.push_back(path);
+        }
+        path += "->";
+        helper(root->left, path, ans);
+        helper(root->right, path, ans);
+        
     }
     vector<string> binaryTreePaths(TreeNode* root) {
         vector<string> ans;
