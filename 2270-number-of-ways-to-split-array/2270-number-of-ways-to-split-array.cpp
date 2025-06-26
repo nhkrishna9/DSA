@@ -23,16 +23,16 @@ public:
         return ans;
         */
 
-        int total = 0;
+        long total = 0;
         for(int i=0; i<n; i++){
             total += nums[i];
         }
 
-        int lsum = 0;
+        long lsum = 0;
         int ans=0;
         for(int i=0; i<n-1; i++){
             lsum = lsum + nums[i];
-            int rsum = total - lsum;
+            long rsum = total - lsum;
             if(lsum>=rsum){
                 ++ans;
             }
