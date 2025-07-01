@@ -3,12 +3,13 @@ public:
     char repeatedCharacter(string s) {
         unordered_set<char> seen;
         for(char c:s){
-            if(s.contains(c)){
+            if(seen.contains(c)){
                 return c;
             }
             seen.insert(c);
         }
         return ' ';
+
         /*
         int n = s.size();
         for(int i=0; i<n; i++){
