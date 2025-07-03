@@ -17,7 +17,12 @@ public:
         }
         int delVal = q1.front();
         q1.pop();
-        swap(q1,q2);
+        //swap(q1,q2);
+        while(q2.size()>0){
+            q1.push(q2.front());
+            q2.pop();
+        }
+
 
         return delVal;
     }
@@ -31,7 +36,12 @@ public:
         q2.push(q1.front());
         q1.pop();
 
-        swap(q1,q2);
+        //swap(q1,q2);
+        while(q2.size()>0){
+            q1.push(q2.front());
+            q2.pop();
+        }
+
 
         return top;
         
