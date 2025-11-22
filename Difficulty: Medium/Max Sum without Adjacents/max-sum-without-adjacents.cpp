@@ -5,18 +5,20 @@ class Solution {
     int findMaxSum(vector<int>& arr) {
         // code here
         int n = arr.size();
-        if(n==0) return 0;
-        if(n==1) return arr[0];
-        //if(n==2) return arr[1];
-
-        vector<int> ans(n);
-        ans[0] = arr[0];
-        ans[1] = max(arr[0], arr[1]);
+        int* maxSumArr = new int[n];
+        
+        maxSumArr[0] = arr[0];
+        maxSumArr[1] = max(arr[0], arr[1]);
         
         for(int i=2; i<n; i++){
-            ans[i] = max(arr[i]+ans[i-2], ans[i-1]);
+            if(maxSumArr[i-1] < arr[i]+maxSumArr[i-2]){
+                maxSumArr[i] = arr[i]+maxSumArr[i-2];        
+            }
+            else{
+                maxSumArr[i] = maxSumArr[i-1];
+            }
         }
-        return ans[n-1];
         
+        return maxSumArr[n-1];
     }
 };
