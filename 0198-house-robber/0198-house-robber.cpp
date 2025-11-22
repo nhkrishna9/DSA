@@ -1,18 +1,22 @@
 class Solution {
 public:
     int rob(vector<int>& nums) {
-        int n = nums.size();
-        if(n==0) return 0;
-        if(n==1) return nums[0];
-
-        vector<int> ans(n);
-        ans[0] = nums[0];
-        ans[1] = max(nums[0], nums[1]);
-
-        for(int i=2; i<n; i++){
-            ans[i] = max(nums[i]+ans[i-2], ans[i-1]);
+        int numHouses = nums.size();
+        if(numHouses ==0){
+            return 0;
+        }
+        if(numHouses == 1){
+            return nums[0];
         }
 
-        return ans[n-1];
+        vector<int> maxMoneyRobbed(numHouses);
+        maxMoneyRobbed[0] = nums[0];
+        maxMoneyRobbed[1] = max(nums[0], nums[1]);
+
+        for(int i=2; i<numHouses; i++){
+            maxMoneyRobbed[i] = max(maxMoneyRobbed[i-1], maxMoneyRobbed[i-2]+nums[i]);
+        }
+        
+        return maxMoneyRobbed[numHouses-1];
     }
 };
